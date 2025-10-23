@@ -1,0 +1,50 @@
+# Terraform files
+*.tfstate
+*.tfstate.*
+.terraform/
+terraform.tfvars
+.terraformrc
+terraform.rc
+
+# SSH Keys and Certificates
+*.pem
+*.key
+*.crt
+*.csr
+key-pair*
+id_rsa*
+id_ed25519*
+
+# Kubernetes config files
+kubeconfig
+.kube/
+**/kubeconfig
+*.kubeconfig
+
+# Environment variables
+.env
+*.env
+.env.*
+!.env.example
+
+# Secrets and credentials
+secrets.yaml
+*secrets*
+credentials.json
+*credential*
+*password*
+*token*
+*.pfx
+*.p12
+*private*
+
+# Logs and temporary files
+*.log
+*.tmp
+.DS_Store
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo

@@ -22,7 +22,6 @@ This project demonstrates a highly available and scalable Kubernetes application
 ```
 k8s-project/
 ├── README.md
-├── key-pair.pem                 # SSH private key
 ├── terraform/                   # Infrastructure as Code
 │   ├── main.tf                  # Main Terraform configuration
 │   ├── variables.tf             # Variable definitions
@@ -52,9 +51,17 @@ k8s-project/
 ### 1. Configure AWS Credentials
 
 **Option A: Environment Variables (Recommended)**
-export AWS_ACCESS_KEY_ID="your-access-key"
-export AWS_SECRET_ACCESS_KEY="your-secret-key"
-export AWS_DEFAULT_REGION="us-west-2"
+```bash
+# Set up your AWS credentials using environment variables
+export AWS_ACCESS_KEY_ID=your_access_key_id
+export AWS_SECRET_ACCESS_KEY=your_secret_access_key
+export AWS_DEFAULT_REGION=your_preferred_region
+
+# Set up PostgreSQL password
+export POSTGRES_PASSWORD=your_secure_password
+```
+
+> ⚠️ **Security Note**: Never commit actual credentials to version control. The above are just placeholder values.
 
 
 **Option B: Update terraform.tfvars**
@@ -236,7 +243,35 @@ kubectl logs -n ingress-nginx -l app.kubernetes.io/component=controller
 # System events
 kubectl get events --sort-by=.metadata.creationTimestamp
 
+## Security Best Practices
+
+### Sensitive Information
+- Never commit sensitive information to version control:
+  - AWS credentials
+  - SSH private keys
+  - Database passwords
+  - Terraform state files
+  - Kubeconfig files
+  - Environment files (.env)
+
+### Environment Variables
+- Use environment variables for sensitive values:
+  - AWS credentials
+  - Database passwords
+  - API keys
+- Create a `.env.example` file with placeholder values as a template
+
+### Access Management
+- Use AWS IAM roles with least privilege
+- Regularly rotate credentials
+- Use secrets management solutions in production
+- Keep SSH private keys secure and never commit them
+
 ## Cleanup
+
+# Export required environment variables first
+export AWS_ACCESS_KEY_ID=your_access_key_id
+export AWS_SECRET_ACCESS_KEY=your_secret_access_key
 
 # Destroy infrastructure
 cd terraform
@@ -262,7 +297,52 @@ terraform destroy -auto-approve
 - **update-app.sh**: Performs zero-downtime rolling updates
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 This project demonstrates all required Kubernetes concepts: cluster setup, ingress controller, high availability, zero-downtime updates, and stateful database deployment.
 =======
 This project demonstrates all required Kubernetes concepts: cluster setup, ingress controller, high availability, zero-downtime updates, and stateful database deployment.
 >>>>>>> 5d11998 (Initial commit)
+=======
+This project demonstrates all required Kubernetes concepts: cluster setup, ingress controller, high availability, zero-downtime updates, and stateful database deployment.
+
+## Excluded Files and Directories
+
+The following files and directories are excluded from version control for security reasons:
+
+```plaintext
+# Terraform Related
+terraform/terraform.tfstate
+terraform/terraform.tfstate.backup
+terraform/.terraform/
+terraform/terraform.tfvars
+
+# SSH and Authentication
+key-pair.pem
+.kube/
+kubeconfig
+*.key
+*.crt
+*.csr
+
+# Environment and Secrets
+.env
+*.env
+secrets.yaml
+credentials.json
+
+# Project Specific
+terraform/terraform.tfstate       # Contains AWS Account ID and infrastructure details
+terraform/terraform.tfstate.backup
+kubeconfig                       # Contains cluster access credentials
+key-pair.pem                     # SSH private key
+```
+
+These files are excluded because they contain sensitive information such as:
+- Infrastructure state and secrets
+- Private SSH keys and certificates
+- Cluster access credentials
+- Environment-specific configurations
+- AWS account information
+
+Please ensure these files are properly secured and never committed to version control.
+>>>>>>> b74b3d3 (Initial commit)

@@ -30,8 +30,14 @@ EOF
 ssh -i key-pair.pem ubuntu@$INSTANCE_IP << 'EOF'
     helm repo add bitnami https://charts.bitnami.com/bitnami
     helm repo update
+    # Check if POSTGRES_PASSWORD is set
+    if [ -z "${POSTGRES_PASSWORD}" ]; then
+        echo "Error: POSTGRES_PASSWORD environment variable is not set"
+        exit 1
+    fi
+    
     helm install postgresql bitnami/postgresql \
-        --set auth.postgresPassword=postgres123 \
+        --set auth.postgresPassword="${POSTGRES_PASSWORD}" \
         --set primary.persistence.size=1Gi
 EOF
 
