@@ -261,4 +261,8 @@ terraform destroy -auto-approve
 - **deploy-apps.sh**: Deploys NGINX Ingress, sample app, and PostgreSQL
 - **update-app.sh**: Performs zero-downtime rolling updates
 
+<<<<<<< HEAD
 This project demonstrates all required Kubernetes concepts: cluster setup, ingress controller, high availability, zero-downtime updates, and stateful database deployment.
+=======
+This project demonstrates all required Kubernetes concepts: cluster setup, ingress controller, high availability, zero-downtime updates, and stateful database deployment.
+>>>>>>> 5d11998 (Initial commit)
