@@ -47,4 +47,8 @@ credentials.json
 .vscode/
 .idea/
 *.swp
-*.swo
+*.swo.terraform/
+.terraform.lock.hcl
+*.tfstate
+*.tfstate.backup
+crash.log
